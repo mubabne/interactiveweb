@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ember Coffee House</title>
+  <meta name="description" content="Ember — a slow-pour coffee house. Small-batch roasts, honest espresso, and a cup you can actually play with." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="is-loading">
+
+  <!-- Gooey liquid filter used by the spill canvas -->
+  <svg class="sr-only" aria-hidden="true" width="0" height="0">
+    <defs>
+      <filter id="goo" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" />
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__words">
+      <span>Grinding</span><span>Tamping</span><span>Pulling</span><span>Pouring</span>
+    </div>
+    <div class="loader__count"><span class="loader__num">0</span><sup>%</sup></div>
+    <div class="loader__bar"><i></i></div>
+  </div>
+
+  <!-- Custom cursor -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__ring"><span class="cursor__label"></span></div>
+    <div class="cursor__dot"></div>
+  </div>
+
+  <!-- Floating image for menu list hover -->
+  <div class="hover-reveal" aria-hidden="true"><div class="hover-reveal__inner"><img alt="" /></div></div>
+
+  <header class="header">
+    <a href="#top" class="header__logo" data-scroll-to data-magnetic>Ember<sup>®</sup></a>
+    <nav class="header__nav" aria-label="Primary">
+      <a href="#story" data-scroll-to class="link-roll"><span data-text="Story">Story</span></a>
+      <a href="#menu" data-scroll-to class="link-roll"><span data-text="Menu">Menu</span></a>
+      <a href="#ritual" data-scroll-to class="link-roll"><span data-text="Ritual">Ritual</span></a>
+      <a href="#visit" data-scroll-to class="link-roll"><span data-text="Visit">Visit</span></a>
+    </nav>
+    <a href="#visit" class="btn btn--pill" data-scroll-to data-magnetic data-cursor="Go">
+      <span class="btn__dot"></span><span>Order ahead</span>
+    </a>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO with interactive cup -->
+    <section class="hero" data-theme="light">
+      <div class="hero__meta">
+        <span>(01)</span>
+        <span>Coffee house &amp; roastery</span>
+        <span class="hero__spilled">Cups spilled <b class="js-spilled">0.00</b></span>
+      </div>
+
+      <h1 class="hero__title" aria-label="Pull a perfect cup.">
+        <span class="line"><span class="line__inner">Pull a</span></span>
+        <span class="line"><span class="line__inner"><em>perfect</em></span></span>
+        <span class="line"><span class="line__inner">cup.</span></span>
+      </h1>
+
+      <p class="hero__lede">
+        Small-batch roasts, honest espresso, and a cup you can actually play with.
+        <span class="muted">Go on — grab it.</span>
+      </p>
+
+      <div class="cup-stage">
+        <canvas class="cup-stage__cup"></canvas>
+        <canvas class="cup-stage__fx"></canvas>
+        <div class="cup-stage__hit" role="button" tabindex="0" aria-label="Coffee cup. Drag and pull to spill it; press Enter to tip it over." data-cursor="Pull"></div>
+        <div class="cup-hint" aria-hidden="true">
+          <svg viewBox="0 0 80 40" width="64" height="32"><path d="M4 30 C 20 4, 50 2, 72 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M64 10 L 73 18 L 62 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Click &amp; pull the cup</span>
+        </div>
+      </div>
+
+      <div class="hero__foot">
+        <span class="hero__scroll"><i></i>Scroll</span>
+        <span>Open daily — 07:00 → 18:00</span>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="marquee" aria-label="Roasted in small batches, poured slow">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Roasted in small batches</span><i>✺</i>
+          <span><em>poured slow</em></span><i>✺</i>
+          <span>made to spill</span><i>✺</i>
+          <span><em>refilled with love</em></span><i>✺</i>
+        </div>
+        <div class="marquee__group" aria-hidden="true">
+          <span>Roasted in small batches</span><i>✺</i>
+          <span><em>poured slow</em></span><i>✺</i>
+          <span>made to spill</span><i>✺</i>
+          <span><em>refilled with love</em></span><i>✺</i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Story / statement -->
+    <section class="story" id="story" data-theme="light">
+      <div class="section-label"><span>(02)</span><span>Our story</span></div>
+      <p class="story__statement js-words">
+        We're a neighbourhood coffee house obsessed with the small stuff — the grind, the bloom, the eighteen seconds before the shot turns. Every cup is pulled by hand, served without hurry, and refilled before you ask.
+      </p>
+
+      <div class="story__grid">
+        <figure class="story__img story__img--a" data-speed="-0.12">
+          <div class="img-wrap js-clip"><img src="assets/img/pour-bar.jpg" alt="Pour-over brewers lined up at the coffee bar" loading="lazy" /></div>
+          <figcaption>(a) The slow bar</figcaption>
+        </figure>
+        <figure class="story__img story__img--b" data-speed="0.18">
+          <div class="img-wrap js-clip"><img src="assets/img/latte-pour.jpg" alt="Barista pouring latte art into a white cup" loading="lazy" /></div>
+          <figcaption>(b) Free-pour rosetta</figcaption>
+        </figure>
+        <div class="story__copy">
+          <p>Founded in a converted print shop in 2014, Ember roasts twice a week on a 12-kilo drum. Nothing sits on the shelf longer than ten days.</p>
+          <a href="#menu" class="link-arrow" data-scroll-to data-cursor="See">See the menu <span>→</span></a>
+        </div>
+        <figure class="story__img story__img--c" data-speed="-0.06">
+          <div class="img-wrap js-clip"><img src="assets/img/portafilters.jpg" alt="Three portafilters holding beans, grounds and a latte" loading="lazy" /></div>
+          <figcaption>(c) Bean, grind, cup</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Menu list -->
+    <section class="menu" id="menu" data-theme="dark">
+      <div class="section-label"><span>(03)</span><span>The menu</span></div>
+      <h2 class="big-title js-split">What we <em>pour</em></h2>
+
+      <ul class="menu__list">
+        <li class="menu__item" data-img="assets/img/black.jpg" data-cursor="Taste">
+          <span class="menu__idx">01</span><span class="menu__name">Espresso</span><span class="menu__notes">Dark cocoa, cherry, long finish</span><span class="menu__price">3.50</span>
+        </li>
+        <li class="menu__item" data-img="assets/img/lattes.jpg" data-cursor="Taste">
+          <span class="menu__idx">02</span><span class="menu__name">Flat White</span><span class="menu__notes">Silky microfoam, double ristretto</span><span class="menu__price">4.75</span>
+        </li>
+        <li class="menu__item" data-img="assets/img/flight.jpg" data-cursor="Taste">
+          <span class="menu__idx">03</span><span class="menu__name">Tasting Flight</span><span class="menu__notes">Eight cups, one origin, every ratio</span><span class="menu__price">14.00</span>
+        </li>
+        <li class="menu__item" data-img="assets/img/pour-bar.jpg" data-cursor="Taste">
+          <span class="menu__idx">04</span><span class="menu__name">Pour Over</span><span class="menu__notes">Rotating single origin, V60 or Chemex</span><span class="menu__price">6.00</span>
+        </li>
+        <li class="menu__item" data-img="assets/img/iced-glass.jpg" data-cursor="Taste">
+          <span class="menu__idx">05</span><span class="menu__name">Iced Oat Latte</span><span class="menu__notes">House oat milk, brown-sugar syrup</span><span class="menu__price">5.50</span>
+        </li>
+        <li class="menu__item" data-img="assets/img/iced.jpg" data-cursor="Taste">
+          <span class="menu__idx">06</span><span class="menu__name">48h Cold Brew</span><span class="menu__notes">Steeped two days, poured over one big rock</span><span class="menu__price">5.25</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Horizontal ritual -->
+    <section class="ritual" id="ritual" data-theme="dark">
+      <div class="ritual__pin">
+        <div class="ritual__head">
+          <div class="section-label"><span>(04)</span><span>The ritual</span></div>
+          <h2 class="big-title js-split">Four steps, <em>no shortcuts</em></h2>
+        </div>
+        <div class="ritual__track">
+          <article class="ritual__card">
+            <div class="ritual__img"><img src="assets/img/beans.jpg" alt="Freshly roasted coffee beans" loading="lazy" /></div>
+            <div class="ritual__txt"><span class="ritual__num">01</span><h3>Source</h3><p>Direct-trade lots from twelve farms we visit every harvest.</p></div>
+          </article>
+          <article class="ritual__card">
+            <div class="ritual__img"><img src="assets/img/boards.jpg" alt="Coffee grounds, beans and a latte on wooden boards" loading="lazy" /></div>
+            <div class="ritual__txt"><span class="ritual__num">02</span><h3>Roast</h3><p>Light enough to taste the farm, dark enough to taste like coffee.</p></div>
+          </article>
+          <article class="ritual__card">
+            <div class="ritual__img"><img src="assets/img/moody.jpg" alt="Black coffee in a cup on a tray with leaves" loading="lazy" /></div>
+            <div class="ritual__txt"><span class="ritual__num">03</span><h3>Grind</h3><p>Dialled in every morning, re-checked every hour, weighed to a tenth of a gram.</p></div>
+          </article>
+          <article class="ritual__card">
+            <div class="ritual__img"><img src="assets/img/latte-pour.jpg" alt="Milk being poured into an espresso" loading="lazy" /></div>
+            <div class="ritual__txt"><span class="ritual__num">04</span><h3>Pour</h3><p>By hand, at the bar, while you watch. Then we do it again.</p></div>
+          </article>
+        </div>
+        <div class="ritual__progress"><i></i></div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats" data-theme="light">
+      <div class="stats__item"><span class="stats__num" data-count="12">0</span><span class="stats__label">Partner farms</span></div>
+      <div class="stats__item"><span class="stats__num" data-count="48" data-suffix="h">0</span><span class="stats__label">Cold-brew steep</span></div>
+      <div class="stats__item"><span class="stats__num" data-count="1740">0</span><span class="stats__label">Cups poured each week</span></div>
+    </section>
+
+    <!-- Wide parallax image -->
+    <section class="wide" data-theme="light">
+      <div class="wide__frame js-wide">
+        <img src="assets/img/interior.jpg" alt="Inside the Ember coffee house, warm lights over the bar" loading="lazy" />
+      </div>
+      <p class="wide__caption"><span>(05)</span> Forty seats, one long bar, zero laptops-on-the-big-table rules.</p>
+    </section>
+
+    <!-- Visit -->
+    <section class="visit" id="visit" data-theme="light">
+      <div class="section-label"><span>(06)</span><span>Visit</span></div>
+      <h2 class="visit__title js-split">Come <em>by.</em></h2>
+      <div class="visit__grid">
+        <div>
+          <h4>Address</h4>
+          <p>214 Ember Lane<br />Old Print District</p>
+        </div>
+        <div>
+          <h4>Hours</h4>
+          <p>Mon — Fri 07:00 → 18:00<br />Sat — Sun 08:00 → 17:00</p>
+        </div>
+        <div>
+          <h4>Say hi</h4>
+          <p><a href="mailto:hello@ember.coffee" class="link-roll"><span data-text="hello@ember.coffee">hello@ember.coffee</span></a><br />@embercoffee</p>
+        </div>
+        <a href="#top" class="visit__cta" data-scroll-to data-magnetic data-cursor="Yes">
+          <span>Spill<br />another?</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" data-theme="dark">
+    <div class="footer__brand" aria-label="Ember">
+      <span>E</span><span>M</span><span>B</span><span>E</span><span>R</span>
+    </div>
+    <div class="footer__row">
+      <span>© 2026 Ember Coffee House</span>
+      <span>Roasted slow. Poured fast. Spilled sometimes.</span>
+      <a href="#top" data-scroll-to class="link-roll"><span data-text="Back to top ↑">Back to top ↑</span></a>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="js/cup.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
